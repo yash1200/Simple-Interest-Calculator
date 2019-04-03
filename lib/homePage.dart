@@ -15,6 +15,9 @@ class _homepageState extends State<homepage> {
   TextEditingController principalcontroller = TextEditingController();
   TextEditingController ratecontroller = TextEditingController();
   TextEditingController timecontroller = TextEditingController();
+  static const _kFontFam = 'MyFlutterApp';
+
+  static const IconData percent = const IconData(0xf295, fontFamily: _kFontFam);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class _homepageState extends State<homepage> {
       body: Form(
         key: fkey,
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(0.0),
           child: ListView(
             children: <Widget>[
               Padding(
@@ -55,6 +58,7 @@ class _homepageState extends State<homepage> {
                   decoration: InputDecoration(
                       labelText: 'Principal Amount',
                       labelStyle: TextStyle(color: Colors.white),
+                      prefixIcon: Icon(Icons.attach_money,color: Colors.white,),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide: BorderSide(color: Colors.white))),
@@ -75,6 +79,7 @@ class _homepageState extends State<homepage> {
                   decoration: InputDecoration(
                       labelText: 'Rate',
                       labelStyle: TextStyle(color: Colors.white),
+                      prefixIcon: Icon(IconData(0xf295, fontFamily: _kFontFam),color: Colors.white,size: 20,),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide: BorderSide(color: Colors.white, width: 1))),
@@ -100,6 +105,7 @@ class _homepageState extends State<homepage> {
                           decoration: InputDecoration(
                               labelText: 'Term',
                               labelStyle: TextStyle(color: Colors.white),
+                              prefixIcon: Icon(Icons.access_time,color: Colors.white,),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5),
                                   borderSide: BorderSide(color: Colors.white))),
