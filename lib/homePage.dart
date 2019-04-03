@@ -9,7 +9,11 @@ class homepage extends StatefulWidget {
 // ignore: camel_case_types
 class _homepageState extends State<homepage> {
   var currencies = {"Rupees", "Dollars", "Others"};
-  var selectedItem='Rupees';
+  var selectedItem = 'Rupees';
+  var result = '';
+  TextEditingController principalcontroller = TextEditingController();
+  TextEditingController ratecontroller = TextEditingController();
+  TextEditingController timecontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +39,7 @@ class _homepageState extends State<homepage> {
                 left: 20.0, right: 20, top: 20, bottom: 20),
             child: TextField(
               style: TextStyle(color: Colors.white),
+              controller: principalcontroller,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   labelText: 'Principal Amount',
@@ -48,13 +53,14 @@ class _homepageState extends State<homepage> {
             padding: const EdgeInsets.only(left: 20.0, right: 20),
             child: TextField(
               style: TextStyle(color: Colors.white),
+              controller: ratecontroller,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   labelText: 'Rate',
                   labelStyle: TextStyle(color: Colors.white),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(color: Colors.white,width: 1))),
+                      borderSide: BorderSide(color: Colors.white, width: 1))),
             ),
           ),
           Padding(
@@ -66,6 +72,7 @@ class _homepageState extends State<homepage> {
                     padding: const EdgeInsets.only(right: 20.0),
                     child: TextField(
                       style: TextStyle(color: Colors.white),
+                      controller: timecontroller,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           labelText: 'Term',
@@ -97,23 +104,39 @@ class _homepageState extends State<homepage> {
             children: <Widget>[
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(left:20.0,right: 20),
+                  padding: const EdgeInsets.only(left: 20.0, right: 20),
                   child: RaisedButton(
                     color: Colors.blue,
-                    child: Text("Calculate",style: TextStyle(color: Colors.white),), onPressed: () {},
+                    child: Text(
+                      "Calculate",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        this.result=calculate();
+                      });
+                    },
                   ),
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(right:20.0),
+                  padding: const EdgeInsets.only(right: 20.0),
                   child: RaisedButton(
                     color: Colors.blue,
-                    child: Text("Reset",style: TextStyle(color: Colors.white),), onPressed: () {},
+                    child: Text(
+                      "Reset",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {},
                   ),
                 ),
               )
             ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(this.result),
           )
         ],
       ),
@@ -122,7 +145,18 @@ class _homepageState extends State<homepage> {
 
   void dropdownfun(String newValueSelected) {
     setState(() {
-      this.selectedItem=newValueSelected;
+      this.selectedItem = newValueSelected;
     });
+  }
+
+  String calculate() {
+    double principal = double.parse(principalcontroller.text);
+    double rate = double.parse(ratecontroller.text);
+    double time = double.parse(timecontroller.text);
+    int time1=time.toInt();
+
+    double amount = (principal + (principal * rate * time) / 100);
+    var statement="Your amount after $time1 years is $amount $selectedItem.";
+    return statement;
   }
 }
