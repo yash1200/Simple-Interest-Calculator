@@ -8,8 +8,10 @@ class homepage extends StatefulWidget {
 
 // ignore: camel_case_types
 class _homepageState extends State<homepage> {
-  var fkey=GlobalKey<FormState>();
-  var currencies = {"Rupees", "Dollars", "Others"};
+  var fkey = GlobalKey<FormState>();
+  var currencies = {
+  "Rupees", "Dollars", "Others"
+  };
   var selectedItem = 'Rupees';
   var result = '';
   TextEditingController principalcontroller = TextEditingController();
@@ -49,19 +51,19 @@ class _homepageState extends State<homepage> {
                   style: TextStyle(color: Colors.white),
                   controller: principalcontroller,
                   keyboardType: TextInputType.number,
-                  validator: (String value){
-                    if(value.isEmpty)
-                      {
-                        return 'Please Enter Principal Amount';
-                      }
+                  validator: (String value) {
+                    if (value.isEmpty) {
+                      return 'Please Enter Principal Amount';
+                    }
                   },
                   decoration: InputDecoration(
                       labelText: 'Principal Amount',
                       labelStyle: TextStyle(color: Colors.white),
-                      prefixIcon: Icon(Icons.attach_money,color: Colors.white,),
+                      prefixIcon: Icon(
+                        Icons.attach_money, color: Colors.white,),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
-                          borderSide: BorderSide(color: Colors.white))),
+                          borderSide: BorderSide(color: Colors.blue))),
                 ),
               ),
               Padding(
@@ -70,19 +72,19 @@ class _homepageState extends State<homepage> {
                   style: TextStyle(color: Colors.white),
                   controller: ratecontroller,
                   keyboardType: TextInputType.number,
-                  validator: (String value){
-                    if(value.isEmpty)
-                    {
+                  validator: (String value) {
+                    if (value.isEmpty) {
                       return 'Please Enter Rate';
                     }
                   },
                   decoration: InputDecoration(
                       labelText: 'Rate',
                       labelStyle: TextStyle(color: Colors.white),
-                      prefixIcon: Icon(IconData(0xf295, fontFamily: _kFontFam),color: Colors.white,size: 20,),
+                      prefixIcon: Icon(IconData(0xf295, fontFamily: _kFontFam),
+                        color: Colors.white, size: 20,),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
-                          borderSide: BorderSide(color: Colors.white, width: 1))),
+                          borderSide: BorderSide(color: Colors.blue,))),
                 ),
               ),
               Padding(
@@ -96,19 +98,19 @@ class _homepageState extends State<homepage> {
                           style: TextStyle(color: Colors.white),
                           controller: timecontroller,
                           keyboardType: TextInputType.number,
-                          validator: (String value){
-                            if(value.isEmpty)
-                            {
+                          validator: (String value) {
+                            if (value.isEmpty) {
                               return 'Please Enter Time';
                             }
                           },
                           decoration: InputDecoration(
                               labelText: 'Term',
                               labelStyle: TextStyle(color: Colors.white),
-                              prefixIcon: Icon(Icons.access_time,color: Colors.white,),
+                              prefixIcon: Icon(
+                                Icons.access_time, color: Colors.white,),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5),
-                                  borderSide: BorderSide(color: Colors.white))),
+                                  borderSide: BorderSide(color: Colors.blue))),
                         ),
                       ),
                     ),
@@ -142,8 +144,8 @@ class _homepageState extends State<homepage> {
                         ),
                         onPressed: () {
                           setState(() {
-                            if(fkey.currentState.validate()){
-                              this.result=calculate();
+                            if (fkey.currentState.validate()) {
+                              this.result = calculate();
                             }
                           });
                         },
@@ -190,18 +192,18 @@ class _homepageState extends State<homepage> {
     double principal = double.parse(principalcontroller.text);
     double rate = double.parse(ratecontroller.text);
     double time = double.parse(timecontroller.text);
-    int time1=time.toInt();
+    int time1 = time.toInt();
 
     double amount = (principal + (principal * rate * time) / 100);
-    var statement="Your amount after $time1 years is $amount $selectedItem.";
+    var statement = "Your amount after $time1 years is $amount $selectedItem.";
     return statement;
   }
 
   void reset() {
-    principalcontroller.text='';
-    ratecontroller.text='';
-    timecontroller.text='';
-    this.result='';
-    selectedItem=currencies.elementAt(0);
+    principalcontroller.text = '';
+    ratecontroller.text = '';
+    timecontroller.text = '';
+    this.result = '';
+    selectedItem = currencies.elementAt(0);
   }
 }
